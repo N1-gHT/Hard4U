@@ -1,0 +1,115 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior in Hard4U
+title: "[Bug]: "
+labels: ["bug"]
+assignees:
+  - N1-gHT
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug! Please fill in all the fields below to help me investigate and fix the issue as quickly as possible.
+        > ⚠️ If you discovered a **security vulnerability**, please do **not** open an Issue. Refer to the [Security Policy](/SECURITY.md) instead.
+
+  - type: dropdown
+    id: module
+    attributes:
+      label: 🧩 Affected Module
+      description: Which module is the bug related to?
+      options:
+        - controller.sh (Master script)
+        - 1_bootloader.sh (Bootloader / GRUB)
+        - 2_privilege.sh (Privilege Escalation)
+        - 3_network.sh (Network Configuration)
+        - 4_logging.sh (Logging & Auditing)
+        - 5_access_control.sh (Access Control / PAM / SSH)
+        - 6_maintenance.sh (System Maintenance)
+        - Other / Unknown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: ⚙️ Mode Used
+      description: Which flag were you running when the bug occurred?
+      options:
+        - "--audit"
+        - "--remediation"
+        - "--auto"
+        - Interactive menu (no flag)
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: 📦 Script Version / Commit
+      description: Run `git log --oneline -1` and paste the output here.
+      placeholder: "e.g. a1b2c3d feat: add network module"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: 🖥️ Environment
+      description: How are you running the scripts?
+      options:
+        - Virtual Machine (VM)
+        - Bare metal (physical server)
+        - Cloud instance (VPS, AWS, GCP, etc.)
+        - Container (Docker, LXC, etc.)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: os_version
+    attributes:
+      label: 🐧 Debian Version
+      description: Paste the output of `cat /etc/os-release | grep PRETTY_NAME`.
+      placeholder: "e.g. PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\""
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ Expected Behavior
+      description: What did you expect to happen?
+      placeholder: "e.g. The module should set the journald Storage to 'persistent'."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: ❌ Actual Behavior
+      description: What actually happened instead?
+      placeholder: "e.g. The script exited with an error and no changes were applied."
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 🖥️ Terminal Output / Logs
+      description: |
+        Paste the full terminal output of the script run.
+        Tip: you can enable debug mode with `sudo SCRIPT_DEBUG=true bash ./modules/<module>.sh --audit`
+      render: shell
+      placeholder: |
+        $ sudo ./modules/4_logging.sh --audit
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 📝 Additional Context
+      description: Any other information that might help? (config changes, recent system updates, etc.)
+    validations:
+      required: false
