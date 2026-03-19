@@ -1,0 +1,27 @@
+# Global fallback
+*                                   @N1-gHT
+
+# Documentation
+*.md                                @N1-gHT
+LICENSE                             @N1-gHT
+.gitignore                          @N1-gHT
+
+# GitHub configuration
+.github/                            @N1-gHT
+.github/workflows/                  @N1-gHT
+.github/ISSUE_TEMPLATE/             @N1-gHT
+.github/PULL_REQUEST_TEMPLATE.md    @N1-gHT
+
+# Master controller
+controller.sh                       @N1-gHT
+
+# Modules
+modules/1_bootloader.sh             @N1-gHT
+modules/2_privilege.sh              @N1-gHT
+modules/3_network.sh                @N1-gHT
+modules/4_logging.sh                @N1-gHT
+modules/5_access_control.sh         @N1-gHT
+modules/6_maintenance.sh            @N1-gHT
+
+# Reference documents
+docs/                               @N1-gHT
