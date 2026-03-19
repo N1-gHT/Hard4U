@@ -292,7 +292,7 @@ Each module is **fully self-contained** and implements three core functions:
 All notable changes to this project are documented here.  
 This project adheres to [Semantic Versioning](https://semver.org/).
 
-### [v0.1.0] — 2025-XX-XX *(Initial Release)*
+### [v0.1.0] — 2026-XX-XX *(Initial Release)*
 
 #### Added
 - `controller.sh` — master orchestration script with interactive menu
