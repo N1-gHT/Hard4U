@@ -1,0 +1,80 @@
+name: 💡 Feature Request
+description: Propose a new feature, module, or improvement for Hard4U
+title: "[Feature]: "
+labels: ["feature"]
+assignees:
+  - N1-gHT
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to suggest an improvement! Please fill in the fields below so we can understand and evaluate your idea.
+        > 💡 Before submitting, check the [Roadmap](../../README.md#️-roadmap--future-developments) to see if your idea is already planned.
+
+  - type: dropdown
+    id: cis_section
+    attributes:
+      label: 📊 Related CIS Section
+      description: Which CIS Benchmark section does this feature relate to? Select "Not CIS-related" if it's a tooling or workflow improvement.
+      options:
+        - "CIS 1.x — Filesystem & Partitions"
+        - "CIS 1.x — Bootloader (GRUB)"
+        - "CIS 2.x — Services"
+        - "CIS 3.x — Network Configuration"
+        - "CIS 4.x — Logging & Auditing"
+        - "CIS 5.x — Access Control (PAM / SSH)"
+        - "CIS 6.x — System Maintenance"
+        - "Tooling / Workflow / CI"
+        - "Reporting / Output"
+        - "Multi-distro support"
+        - "Not CIS-related / Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🔍 Problem This Solves
+      description: What problem or limitation does this feature address? What can't you do today that you wish you could?
+      placeholder: "e.g. There is currently no way to generate an audit report in HTML format to share with a team."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 🛠️ Proposed Solution
+      description: Describe the feature or change you'd like to see. Be as specific as possible.
+      placeholder: "e.g. Add a --report flag to the controller that generates an HTML summary of the last audit run."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternatives Considered
+      description: Have you considered other ways to solve this problem? Why do you prefer your proposed solution?
+      placeholder: "e.g. I considered using a CSV export, but HTML is more readable for non-technical stakeholders."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: 🤝 Would You Like to Contribute?
+      description: Are you willing to open a Pull Request to implement this feature?
+      options:
+        - "Yes, I'd like to implement it"
+        - "Yes, but I'd need guidance"
+        - "No, just suggesting"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 📝 Additional Context
+      description: Links, references, CIS rule numbers, screenshots, or anything else that would help evaluate this request.
+    validations:
+      required: false
