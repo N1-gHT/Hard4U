@@ -1,0 +1,63 @@
+name: 📝 Markdown Validation
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+      - "fix/**"
+      - "docs/**"
+    paths:
+      - "**.md"
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - "**.md"
+
+jobs:
+  markdownlint:
+    name: Lint Markdown files
+    runs-on: ubuntu-latest
+    container:
+      image: debian:trixie
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Install Node.js & markdownlint-cli
+        run: |
+          apt-get update -qq
+          apt-get install -y --no-install-recommends nodejs npm
+          npm install -g markdownlint-cli
+
+      - name: 📝 Run markdownlint on all .md files
+        run: |
+          markdownlint \
+            --config .github/markdownlint.json \
+            "**/*.md" \
+            --ignore node_modules
+
+
+  link-check:
+    name: Check for dead links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔗 Check links in all Markdown files
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >
+            --verbose
+            --no-progress
+            --exclude "^https://placehold\\.co"
+            --exclude "^mailto:"
+            --exclude "^https://discord\\.com"
+            "**/*.md"
+          fail: true

@@ -1,0 +1,20 @@
+{
+  "default": true,
+
+  "MD001": true,
+  "MD003": { "style": "atx" },
+  "MD004": { "style": "dash" },
+  "MD009": { "br_spaces": 0 },
+  "MD010": true,
+  "MD012": { "maximum": 1 },
+  "MD013": false,
+  "MD022": true,
+  "MD023": true,
+  "MD024": false,
+  "MD026": false,
+  "MD033": false,
+  "MD036": false,
+  "MD041": false,
+  "MD046": { "style": "fenced" },
+  "MD048": { "style": "backtick" }
+}

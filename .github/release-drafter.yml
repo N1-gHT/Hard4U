@@ -1,0 +1,25 @@
+changelog:
+  exclude:
+    labels:
+      - duplicate
+      - wontfix
+  categories:
+    - title: "✨ New Features"
+      labels:
+        - feature
+      exclude:
+        labels:
+          - documentation
+    - title: "🐛 Bug Fixes"
+      labels:
+        - bug
+    - title: "🔨 Refactoring"
+      labels:
+        - refactoring
+    - title: "📖 Documentation"
+      labels:
+        - documentation
+    - title: "⚙️ CI/CD & Maintenance"
+      labels:
+        - "ci"
+        - "chore"
