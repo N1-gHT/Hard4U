@@ -1,27 +1,73 @@
-# Global fallback
+# =============================================================================
+# CODEOWNERS — Hard4U
+# =============================================================================
+# Defines who is automatically requested as a reviewer when a PR touches
+# specific files or directories.
+#
+# Syntax: <pattern> <owner>
+# Patterns are evaluated top-to-bottom — the last matching rule wins.
+# More info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Global fallback — catches anything not matched by a specific rule below
+# -----------------------------------------------------------------------------
 *                                   @N1-gHT
 
+# -----------------------------------------------------------------------------
 # Documentation
+# -----------------------------------------------------------------------------
 *.md                                @N1-gHT
 LICENSE                             @N1-gHT
 .gitignore                          @N1-gHT
 
-# GitHub configuration
+# -----------------------------------------------------------------------------
+# GitHub configuration (.github/)
+# -----------------------------------------------------------------------------
 .github/                            @N1-gHT
 .github/workflows/                  @N1-gHT
 .github/ISSUE_TEMPLATE/             @N1-gHT
 .github/PULL_REQUEST_TEMPLATE.md    @N1-gHT
 
+# -----------------------------------------------------------------------------
 # Master controller
-controller.sh                       @N1-gHT
+# -----------------------------------------------------------------------------
+Hardening_Controller.sh                      @N1-gHT
 
-# Modules
-modules/1_bootloader.sh             @N1-gHT
-modules/2_privilege.sh              @N1-gHT
-modules/3_network.sh                @N1-gHT
-modules/4_logging.sh                @N1-gHT
-modules/5_access_control.sh         @N1-gHT
-modules/6_maintenance.sh            @N1-gHT
+# -----------------------------------------------------------------------------
+# Modules — one rule per script
+# -----------------------------------------------------------------------------
+modules/Hardening_1-Kernel_FS.sh             @N1-gHT
+modules/Hardening_2-APT.sh                   @N1-gHT
+modules/Hardening_3-AppArmor.sh              @N1-gHT
+modules/Hardening_4-Bootloader.sh            @N1-gHT
+modules/Hardening_5-Additional_Process.sh    @N1-gHT
+modules/Hardening_6-Banners.sh               @N1-gHT
+modules/Hardening_7-GDM.sh                   @N1-gHT
+modules/Hardening_8-Server_Service.sh        @N1-gHT
+modules/Hardening_9-Client_Services.sh       @N1-gHT
+modules/Hardening_10-Systemd_Timesyncd.sh    @N1-gHT
+modules/Hardening_11-Chrony.sh               @N1-gHT
+modules/Hardening_12-Job_Scheduler.sh        @N1-gHT
+modules/Hardening_13-Network_1.sh            @N1-gHT
+modules/Hardening_14-Network_2.sh            @N1-gHT
+modules/Hardening_15-Firewall.sh             @N1-gHT
+modules/Hardening_16-SSH.sh                  @N1-gHT
+modules/Hardening_17-SSH_Conf.sh             @N1-gHT
+modules/Hardening_18-Sudo.sh                 @N1-gHT
+modules/Hardening_19-PAM_1.sh                @N1-gHT
+modules/Hardening_20-PAM_2.sh                @N1-gHT
+modules/Hardening_21-Accounts.sh             @N1-gHT
+modules/Hardening_22-Journald.sh             @N1-gHT
+modules/Hardening_23-Rsyslog.sh              @N1-gHT
+modules/Hardening_24-Auditd_1.sh             @N1-gHT
+modules/Hardening_25-Auditd_2.sh             @N1-gHT
+modules/Hardening_26-Auditd_3.sh             @N1-gHT
+modules/Hardening_27-AIDE.sh                 @N1-gHT
+modules/Hardening_28-System_Access.sh        @N1-gHT
+modules/Hardening_29-User_Settings.sh        @N1-gHT
 
+# -----------------------------------------------------------------------------
 # Reference documents
+# -----------------------------------------------------------------------------
 docs/                               @N1-gHT

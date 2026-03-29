@@ -160,13 +160,13 @@ Every script supports the following arguments for automated/CI execution:
 
 ```bash
 # Run a dry-run audit on the GRUB module
-sudo ./modules/1_bootloader.sh --audit
+sudo ./modules/Hardening-4_Bootloader.sh --audit
 
 # Auto-remediate privilege escalation settings
-sudo ./modules/2_privilege.sh --auto
+sudo ./modules/Hardening-18_SUDO.sh --auto
 
 # Run the full controller in auto mode
-sudo ./controller.sh --auto
+sudo ./Hardening_Controller.sh --auto
 ```
 
 ### Interactive Mode
@@ -174,7 +174,7 @@ sudo ./controller.sh --auto
 Running a script without any arguments launches a user-friendly interactive menu:
 
 ```bash
-sudo ./controller.sh
+sudo ./Hardening_Controller.sh
 ```
 
 ```
@@ -238,17 +238,40 @@ Hard4U uses a modular architecture to allow granular control over what gets audi
 
 ```
 Hard4U/
-├── controller.sh             # Master script — orchestrates all modules
+├── Hardening_Controller.sh              # Master script — orchestrates all modules
 ├── README.md                 # Project documentation
 ├── docs/
 │   └── CIS_Debian13.pdf      # CIS Benchmark reference (included for convenience)
 └── modules/                  # Independent, self-contained hardening scripts
-    ├── 1_bootloader.sh       # GRUB & boot settings         (CIS Section 1)
-    ├── 2_privilege.sh        # sudo & su configurations     (CIS Section 2)
-    ├── 3_network.sh          # Network stack hardening      (CIS Section 3)
-    ├── 4_logging.sh          # Logging & auditing (auditd)  (CIS Section 4)
-    ├── 5_access_control.sh   # PAM & SSH hardening          (CIS Section 5)
-    ├── 6_maintenance.sh      # System maintenance & cron    (CIS Section 6)
+    ├── Hardening_1-Kernel_FS.sh         # Filesystem & kernel parameters  (CIS 1.x)
+    ├── Hardening_2-APT.sh               # Package management              (CIS 1.x)
+    ├── Hardening_3-AppArmor.sh          # Mandatory access control        (CIS 1.x)
+    ├── Hardening_4-Bootloader.sh        # GRUB & boot settings            (CIS 1.x)
+    ├── Hardening_5-Additional_Process.sh# Additional process hardening    (CIS 1.x)
+    ├── Hardening_6-Banners.sh           # Warning banners                 (CIS 1.7)
+    ├── Hardening_7-GDM.sh               # GNOME display manager           (CIS 1.x)
+    ├── Hardening_8-Server_Service.sh    # Server services                 (CIS 2.x)
+    ├── Hardening_9-Client_Services.sh   # Client services                 (CIS 2.x)
+    ├── Hardening_10-Systemd_Timesyncd.sh# Time synchronization (systemd)  (CIS 2.x)
+    ├── Hardening_11-Chrony.sh           # Time synchronization (chrony)   (CIS 2.x)
+    ├── Hardening_12-Job_Scheduler.sh    # Cron & at job scheduling        (CIS 6.x)
+    ├── Hardening_13-Network_1.sh        # Network stack hardening pt.1    (CIS 3.x)
+    ├── Hardening_14-Network_2.sh        # Network stack hardening pt.2    (CIS 3.x)
+    ├── Hardening_15-Firewall.sh         # Firewall (nftables/iptables)    (CIS 3.x)
+    ├── Hardening_16-SSH.sh              # SSH server hardening            (CIS 5.x)
+    ├── Hardening_17-SSH_Conf.sh         # SSH configuration               (CIS 5.x)
+    ├── Hardening_18-Sudo.sh             # Sudo & su restrictions          (CIS 5.x)
+    ├── Hardening_19-PAM_1.sh            # PAM configuration pt.1         (CIS 5.x)
+    ├── Hardening_20-PAM_2.sh            # PAM configuration pt.2         (CIS 5.x)
+    ├── Hardening_21-Accounts.sh         # User accounts & environment     (CIS 5.x)
+    ├── Hardening_22-Journald.sh         # Journald logging                (CIS 4.x)
+    ├── Hardening_23-Rsyslog.sh          # Rsyslog configuration           (CIS 4.x)
+    ├── Hardening_24-Auditd_1.sh         # Auditd rules pt.1               (CIS 4.x)
+    ├── Hardening_25-Auditd_2.sh         # Auditd rules pt.2               (CIS 4.x)
+    ├── Hardening_26-Auditd_3.sh         # Auditd rules pt.3               (CIS 4.x)
+    ├── Hardening_27-AIDE.sh             # File integrity (AIDE)           (CIS 6.x)
+    ├── Hardening_28-System_Access.sh    # System access controls          (CIS 6.x)
+    └── Hardening_29-User_Settings.sh    # User environment settings       (CIS 6.x)
     └── ...                   # Future modules
 ```
 
@@ -264,7 +287,7 @@ Each module is **fully self-contained** and implements three core functions:
 
 | # | Module | Status | CIS Section | Level |
 |---|--------|:------:|-------------|:-----:|
-| 1 | Filesystem & Partitions | 🔜 Planned | CIS 1.x | L1/L2 |
+| 1 | Filesystem & Partitions | 🚧 In Progress | CIS 1.x | L1/L2 |
 | 2 | Bootloader (GRUB) | ✅ Available | CIS 1.x | L1 |
 | 3 | Privilege Escalation (sudo/su) | ✅ Available | CIS 5.x | L1 |
 | 4 | Network Configuration | ✅ Available | CIS 3.x | L1 |
@@ -280,7 +303,6 @@ Each module is **fully self-contained** and implements three core functions:
 
 - [ ] **Filesystem & Partitions** — Configure FS partitions per CIS recommendations
 - [ ] **CIS Level Selection** — Strictly choose between Level 1 (Server/Workstation) and Level 2 profiles
-- [ ] **Reporting** — Generate exportable audit reports (HTML, JSON, CSV)
 - [ ] **Multi-Distribution Support** — Expand to RedHat / AlmaLinux / RockyLinux
 - [ ] **Rollback Feature** — Restore system state to pre-remediation snapshot
 - [ ] **One-liner Installer** — Stable `curl | bash` installer
@@ -295,13 +317,39 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### [v0.1.0] — 2026-XX-XX *(Initial Release)*
 
 #### Added
-- `controller.sh` — master orchestration script with interactive menu
-- `1_bootloader.sh` — GRUB hardening (password, permissions, cfg)
-- `2_privilege.sh` — sudo/su restrictions per CIS recommendations
-- `3_network.sh` — kernel network parameter hardening
-- `4_logging.sh` — auditd rules and log management
-- `5_access_control.sh` — PAM configuration and SSH daemon hardening
-- `6_maintenance.sh` — cron/at access controls and file permission checks
+### [v0.1.0] — 2026-03-29 *(Initial Release)*
+ 
+#### Added
+- `Hardening_Controller.sh` — master orchestration script with interactive menu
+- `Hardening_1-Kernel_FS.sh` — filesystem & kernel parameter hardening
+- `Hardening_2-APT.sh` — APT package manager hardening
+- `Hardening_3-AppArmor.sh` — AppArmor mandatory access control
+- `Hardening_4-Bootloader.sh` — GRUB bootloader hardening
+- `Hardening_5-Additional_Process.sh` — additional process hardening
+- `Hardening_6-Banners.sh` — warning banners configuration
+- `Hardening_7-GDM.sh` — GNOME display manager hardening
+- `Hardening_8-Server_Service.sh` — server services hardening
+- `Hardening_9-Client_Services.sh` — client services hardening
+- `Hardening_10-Systemd_Timesyncd.sh` — systemd time synchronization
+- `Hardening_11-Chrony.sh` — chrony time synchronization
+- `Hardening_12-Job_Scheduler.sh` — cron & at job scheduling controls
+- `Hardening_13-Network_1.sh` — network stack hardening (part 1)
+- `Hardening_14-Network_2.sh` — network stack hardening (part 2)
+- `Hardening_15-Firewall.sh` — firewall configuration (nftables/iptables)
+- `Hardening_16-SSH.sh` — SSH server hardening
+- `Hardening_17-SSH_Conf.sh` — SSH daemon configuration
+- `Hardening_18-Sudo.sh` — sudo & su privilege escalation controls
+- `Hardening_19-PAM_1.sh` — PAM configuration (part 1)
+- `Hardening_20-PAM_2.sh` — PAM configuration (part 2)
+- `Hardening_21-Accounts.sh` — user accounts & environment hardening
+- `Hardening_22-Journald.sh` — journald logging configuration
+- `Hardening_23-Rsyslog.sh` — rsyslog configuration
+- `Hardening_24-Auditd_1.sh` — auditd rules (part 1)
+- `Hardening_25-Auditd_2.sh` — auditd rules (part 2)
+- `Hardening_26-Auditd_3.sh` — auditd rules (part 3)
+- `Hardening_27-AIDE.sh` — file integrity monitoring (AIDE)
+- `Hardening_28-System_Access.sh` — system access controls
+- `Hardening_29-User_Settings.sh` — user environment settings
 - `--audit`, `--remediation`, `--auto`, `--help` CLI flags for all modules
 
 ---
