@@ -1,0 +1,50 @@
+name: 🧪 Audit Mode Tests
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'modules/**.sh'
+      - 'controller.sh'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'modules/**.sh'
+      - 'controller.sh'
+
+jobs:
+  audit-test:
+    name: Run --audit on all modules (Debian 13)
+    runs-on: ubuntu-latest
+    container:
+      image: debian:trixie-slim
+      options: --user root
+
+    steps:
+      - name: Install dependencies
+        run: apt-get update && apt-get install -y bash gawk grep
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x controller.sh modules/*.sh
+
+      - name: Run audit on each module
+        run: |
+          echo "========================================="
+          echo "  Hard4U — Audit Mode CI Test"
+          echo "========================================="
+          EXIT_CODE=0
+          for script in modules/*.sh; do
+            echo ""
+            echo ">>> Testing: $script --audit"
+            bash "$script" --audit || { echo "❌ FAILED: $script"; EXIT_CODE=1; }
+            echo "✅ OK: $script"
+          done
+          exit $EXIT_CODE
+
+      - name: Run controller audit
+        run: |
+          echo ">>> Testing: controller.sh --audit"
+          bash controller.sh --audit
