@@ -33,6 +33,7 @@ LICENSE                             @N1-gHT
 # Master controller
 # -----------------------------------------------------------------------------
 Hardening_Controller.sh                      @N1-gHT
+install.sh                                   @N1-gHT
 
 # -----------------------------------------------------------------------------
 # Modules — one rule per script

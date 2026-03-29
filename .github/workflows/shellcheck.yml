@@ -33,13 +33,22 @@ jobs:
           apt-get install -y --no-install-recommends shellcheck
           shellcheck --version
 
+      - name: 🔑 Make all scripts executable
+        run: |
+          chmod +x Hardening_Controller.sh
+          chmod +x modules/*.sh
+          chmod +x install.sh
+
       - name: 🔍 Run ShellCheck on all scripts
         run: |
-          echo "=== Scanning: controller.sh ==="
-          shellcheck controller.sh
+          echo "=== Scanning: Hardening_Controller.sh ==="
+          shellcheck Hardening_Controller.sh
 
           echo "=== Scanning: modules/*.sh ==="
           shellcheck modules/*.sh
+
+          echo "=== Scanning: install.sh ==="
+          shellcheck install.sh
 
       - name: ✅ ShellCheck passed
         run: echo "All scripts passed ShellCheck with no errors."
