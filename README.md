@@ -28,6 +28,7 @@ git clone https://github.com/N1-gHT/Hard4U.git && cd Hard4U
 chmod +x controller.sh modules/*.sh
 sudo ./controller.sh --audit        # Dry-run — no changes made
 sudo ./controller.sh --auto         # Audit → Fix → Verify
+
 ```
 
 > Not sure where to start? Run `--audit` first to get a full compliance report, then decide what to remediate.
