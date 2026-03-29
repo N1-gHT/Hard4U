@@ -18,7 +18,7 @@ readonly SCRIPT_DIR
 
 readonly CONTROLLER_NAME="Hardening_Controller.sh"
 readonly CONTROLLER_PATH="${SCRIPT_DIR}/${CONTROLLER_NAME}"
-readonly MODULES_DIR="${SCRIPT_DIR}"     # ← change if modules live elsewhere
+readonly MODULES_DIR="${SCRIPT_DIR}"
 
 # =============================================================================
 # DEPENDENCIES  (data-driven — add entries here to extend checks)
