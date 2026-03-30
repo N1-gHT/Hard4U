@@ -338,6 +338,7 @@ _rem_encrypt_method() {
 _get_users_with_future_pw() {
     local now; now=$(date +%s)
     local users_found=""
+# shellcheck disable=SC2034 # Used but externally
     while IFS=: read -r l_user l_pass; do
         local l_change_date
         l_change_date=$(chage --list "$l_user" 2>/dev/null \

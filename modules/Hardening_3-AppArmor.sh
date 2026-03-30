@@ -315,7 +315,7 @@ configure_grub_for_apparmor() {
         log_warn "Failed to create backup. Aborting for safety."
         return 1
     fi
-
+# shellcheck source=/dev/null
     if current_cmdline=$(source "$GRUB_DEFAULT_FILE" && echo "${GRUB_CMDLINE_LINUX:-}"); then
         log_debug "Current GRUB_CMDLINE_LINUX: '$current_cmdline'"
     else

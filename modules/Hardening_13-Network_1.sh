@@ -414,14 +414,14 @@ _run_audit_checks() {
         _audit_tree_row "$cis_id" "$desc" "$branch" "$audit_func" || global_status=1
     done
 
-    local need_remediate=false
+
     for entry in "${NET_MODULE_CHECKS[@]}"; do
         local cis_id module desc
         IFS='|' read -r cis_id module desc <<< "$entry"
         (( ++current_row ))
         [[ $current_row -eq $total_rows ]] && branch="└─" || branch="├─"
         _audit_tree_row "$cis_id" "$desc" "$branch" \
-            _audit_module_disabled "$module" || { global_status=1; need_remediate=true; }
+            _audit_module_disabled "$module" || { global_status=1; }
     done
 
     print_summary_table

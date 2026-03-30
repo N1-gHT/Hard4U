@@ -26,6 +26,7 @@ C_DIM='\033[2m'
 if [[ ! -t 1 || "${NO_COLOR:-}" == "true" ]]; then
     C_RESET='' C_BRIGHT_RED='' C_GREEN='' C_YELLOW='' C_BLUE='' C_BOLD='' C_DIM=''
 fi
+# shellcheck disable=SC2034  # Unused variables left for readability
 readonly C_RESET C_BRIGHT_RED C_GREEN C_YELLOW C_BLUE C_BOLD C_DIM
 
 # ---------------------------------------------------------------------------

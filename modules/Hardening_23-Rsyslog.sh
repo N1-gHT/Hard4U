@@ -32,6 +32,7 @@ C_DIM='\033[2m'
 if [[ ! -t 1 || "${NO_COLOR:-}" == "true" ]]; then
     C_RESET='' C_BRIGHT_RED='' C_GREEN='' C_YELLOW='' C_BLUE='' C_BOLD='' C_DIM=''
 fi
+# shellcheck disable=SC2034  # Unused variables left for readability
 readonly C_RESET C_BRIGHT_RED C_GREEN C_YELLOW C_BLUE C_BOLD C_DIM
 
 # ---------------------------------------------------------------------------
@@ -65,7 +66,9 @@ readonly JOURNALD_CIS_CONF="/etc/systemd/journald.conf.d/60-cis-journald.conf"
 readonly RSYSLOG_CIS_CONF="/etc/rsyslog.d/60-cis-rsyslog.conf"
 readonly RSYSLOG_FILE_CREATE_MODE="0640"
 readonly RSYSLOG_FILE_CREATE_MODE_REGEX='0[0-6][0-4]0'
+# shellcheck disable=SC2016 # Not expansiion
 readonly RSYSLOG_FCM_DIRECTIVE='$FileCreateMode'
+# shellcheck disable=SC2016 # Not expansiion
 readonly RSYSLOG_FCM_PATTERN='\$FileCreateMode'
 
 readonly RSYSLOG_REMOTE_HOST="loghost.example.com"
@@ -89,7 +92,7 @@ readonly -a RSYSLOG_LOGGING_RULES=(
 
 readonly RSYSLOG_REMOTE_FWD_DEST="action(type=\"omfwd\" target=\"${RSYSLOG_REMOTE_HOST}\" port=\"514\" protocol=\"tcp\" action.resumeRetryCount=\"100\" queue.type=\"LinkedList\" queue.size=\"1000\")"
 readonly RSYSLOG_REMOTE_FWD_REGEX='^\s*\*\.\*\s+action\(type="omfwd"\s+target="[^"]+"'
-
+# shellcheck disable=SC2016 # Not expansiion
 readonly RSYSLOG_LISTENER_REGEX='^\h*(module\(load="?imtcp"?\)|input\(type="?imtcp"?|\$ModLoad\h+imtcp|\$InputTCPServerRun)'
 
 readonly RSYSLOG_GTLS_GLOBAL='global(DefaultNetstreamDriver="gtls")'
