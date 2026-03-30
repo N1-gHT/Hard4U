@@ -439,4 +439,4 @@ See the [LICENSE](https://github.com/N1-gHT/Hard4U/blob/main/LICENSE) file for f
 |---------|------|
 | 🐛 **GitHub Issues** | [Open an issue](https://github.com/N1-gHT/Hard4U/issues/new/choose) |
 | 💬 **Discord** | `n1h_` |
-| 📧 **Email** | contact@n1ght.fr |
+| 📧 **Email** | [contact@n1ght.fr](mailto:contact@n1ght.fr) |

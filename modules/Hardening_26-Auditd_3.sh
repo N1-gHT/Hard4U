@@ -307,7 +307,9 @@ _remediate_conf_param() {
     else
         printf '%s = %s\n' "$key" "$target" >> "$file"
     fi
-    [[ -n "$svc" ]] && systemctl restart "$svc" 2>/dev/null || true
+    if [[ -n "$svc" ]]; then
+        systemctl restart "$svc" 2>/dev/null || true
+    fi
 }
 
 _audit_log_group() {
