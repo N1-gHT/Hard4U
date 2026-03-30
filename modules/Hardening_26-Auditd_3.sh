@@ -344,7 +344,7 @@ _run_audit_checks() {
         audit_func=$(_trim "$audit_func")
         (( ++current_row ))
         if [[ $current_row -eq $total_rows ]]; then branch="└─"; else branch="├─"; fi
-        # shellcheck disable=SC2086  # Intentional word splitting: "func arg" → func arg
+# shellcheck disable=SC2086  # Intentional word splitting: "func arg" → func arg
         _audit_tree_row "$cis_id" "$desc" "$branch" $audit_func || global_status=1
     done
 

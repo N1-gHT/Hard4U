@@ -48,6 +48,7 @@ jobs:
 
       - name: 🧪 Run --audit on all detected modules
         id: audit
+        shell: bash
         run: |
           FAILED_MODULES=()
           PASSED_MODULES=()
@@ -99,6 +100,7 @@ jobs:
           exit "$EXIT_CODE"
 
       - name: 🧪 Run --audit on controller
+        shell: bash
         run: |
           echo "--------------------------------------"
           echo "  Testing: Hardening_Controller.sh"
