@@ -1,35 +1,20 @@
 #!/usr/bin/env bash
 
 # =============================================================================
-# install.sh — Environment checker & installer for CIS Hardening Controller
-# Validates dependencies, file permissions, and module presence.
+# install.sh — Installer & environment checker for Hard4U
+# Detects whether the repo is already present; if not, downloads it first.
 #
-# Usage : sudo ./install.sh
+# Usage (one-liner) : curl -sL https://raw.githubusercontent.com/N1-gHT/Hard4U/main/install.sh | sudo bash
+# Usage (local)     : sudo ./install.sh
+# Override dir      : sudo INSTALL_DIR=/custom/path ./install.sh
+#
 # Exit  : 0 = all checks passed | 1 = one or more checks failed
 # =============================================================================
 
 set -uo pipefail
 
 # =============================================================================
-# CONFIGURATION — adjust these two paths if your layout differs
-# =============================================================================
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" 
-readonly SCRIPT_DIR
-
-readonly CONTROLLER_NAME="Hardening_Controller.sh"
-readonly CONTROLLER_PATH="${SCRIPT_DIR}/${CONTROLLER_NAME}"
-readonly MODULES_DIR="${SCRIPT_DIR}"
-
-# =============================================================================
-# DEPENDENCIES  (data-driven — add entries here to extend checks)
-# Format: "command:apt-package:human-label"
-# =============================================================================
-readonly DEPS=(
-    "jq:jq:jq (JSON processor)"
-)
-
-# =============================================================================
-# COLORS — isatty-aware
+# COLORS — isatty-aware (declared early for use in all sections)
 # =============================================================================
 if [[ -t 1 ]]; then
     C_RESET='\033[0m'
@@ -71,12 +56,44 @@ if [[ "$(id -u)" -ne 0 ]]; then
 fi
 
 # =============================================================================
+# RUN MODE DETECTION
+# =============================================================================
+if [[ -f "${BASH_SOURCE[0]:-}" ]]; then
+    _RUN_MODE="local"
+    BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+else
+    _RUN_MODE="piped"
+    BASE_DIR="${INSTALL_DIR:-/opt/Hard4U}"
+fi
+readonly _RUN_MODE BASE_DIR
+
+# =============================================================================
+# CONFIGURATION
+# =============================================================================
+readonly REPO_URL="https://github.com/N1-gHT/Hard4U.git"
+readonly TARBALL_URL="https://github.com/N1-gHT/Hard4U/archive/refs/heads/main.tar.gz"
+
+readonly CONTROLLER_NAME="Hardening_Controller.sh"
+readonly CONTROLLER_PATH="${BASE_DIR}/${CONTROLLER_NAME}"
+readonly MODULES_DIR="${BASE_DIR}/modules"
+
+# =============================================================================
+# DEPENDENCIES  (data-driven — add entries here to extend checks)
+# Format: "command:apt-package:human-label"
+# =============================================================================
+readonly DEPS=(
+    "git:git:git (version control)"
+    "jq:jq:jq (JSON processor)"
+)
+
+# =============================================================================
 # HEADER
 # =============================================================================
 printf '\n%b=============================================%b\n' "$C_BOLD" "$C_RESET"
-printf '%b  CIS Hardening Controller — install.sh%b\n'       "$C_BOLD" "$C_RESET"
+printf '%b  Hard4U — install.sh%b\n'                         "$C_BOLD" "$C_RESET"
 printf '%b=============================================%b\n'  "$C_BOLD" "$C_RESET"
-printf '  Controller dir : %s\n' "${SCRIPT_DIR}"
+printf '  Mode           : %s\n' "${_RUN_MODE}"
+printf '  Base dir       : %s\n' "${BASE_DIR}"
 printf '  Modules dir    : %s\n' "${MODULES_DIR}"
 printf '  Run by         : %s\n\n' "${SUDO_USER:-root}"
 
@@ -118,7 +135,72 @@ for dep in "${DEPS[@]}"; do
 done
 
 # =============================================================================
-# SECTION 2 — RUNTIME ENVIRONMENT
+# SECTION 2 — DOWNLOAD (only if repo not already present)
+# =============================================================================
+_repo_present() {
+    [[ -f "${CONTROLLER_PATH}" && -d "${MODULES_DIR}" ]]
+}
+
+if _repo_present; then
+    _section "Repository"
+    _ok "Already present at: ${BASE_DIR} — skipping download"
+else
+    _section "Downloading Hard4U"
+
+    if [[ -d "${BASE_DIR}" && -n "$(ls -A "${BASE_DIR}" 2>/dev/null)" ]]; then
+        _warn "Target directory ${BASE_DIR} exists but is incomplete — proceeding"
+    fi
+
+    mkdir -p "${BASE_DIR}"
+
+    _downloaded=false
+
+    if command -v git &>/dev/null; then
+        _info "Cloning repository via git into ${BASE_DIR}…"
+        if git clone --depth=1 "${REPO_URL}" "${BASE_DIR}" 2>/dev/null; then
+            _ok "Repository cloned successfully (git)"
+            _downloaded=true
+        else
+            _warn "git clone failed — trying curl fallback…"
+        fi
+    fi
+
+    if [[ "$_downloaded" == false ]] && command -v curl &>/dev/null; then
+        _info "Downloading tarball via curl…"
+        if curl -sL "${TARBALL_URL}" | tar -xz --strip-components=1 -C "${BASE_DIR}"; then
+            _ok "Repository downloaded successfully (curl)"
+            _downloaded=true
+        else
+            _warn "curl download failed — trying wget fallback…"
+        fi
+    fi
+
+    if [[ "$_downloaded" == false ]] && command -v wget &>/dev/null; then
+        _info "Downloading tarball via wget…"
+        if wget -qO- "${TARBALL_URL}" | tar -xz --strip-components=1 -C "${BASE_DIR}"; then
+            _ok "Repository downloaded successfully (wget)"
+            _downloaded=true
+        else
+            _fail "wget download failed"
+        fi
+    fi
+
+    if [[ "$_downloaded" == false ]]; then
+        _fail "No download method available (git / curl / wget) — cannot continue"
+        printf '\n%b%b  ✗ Download failed. Install git or curl and retry.%b\n\n' \
+            "$C_BRIGHT_RED" "$C_BOLD" "$C_RESET"
+        exit 1
+    fi
+
+    # Verify download integrity
+    if ! _repo_present; then
+        _fail "Download completed but expected files are missing"
+        _fail_count
+    fi
+fi
+
+# =============================================================================
+# SECTION 3 — RUNTIME ENVIRONMENT
 # =============================================================================
 _section "Runtime environment"
 
@@ -137,7 +219,7 @@ else
 fi
 
 # =============================================================================
-# SECTION 3 — CONTROLLER FILE
+# SECTION 4 — CONTROLLER FILE
 # =============================================================================
 _section "Controller"
 
@@ -161,7 +243,7 @@ else
 fi
 
 # =============================================================================
-# SECTION 4 — MODULES DIRECTORY
+# SECTION 5 — MODULES DIRECTORY
 # =============================================================================
 _section "Modules directory"
 
@@ -180,8 +262,7 @@ else
 fi
 
 # =============================================================================
-# SECTION 5 — MODULE INVENTORY
-
+# SECTION 6 — MODULE INVENTORY
 # =============================================================================
 _section "Module inventory"
 
@@ -233,7 +314,7 @@ fi
 
 if [[ "$_ERRORS" -eq 0 ]]; then
     printf '\n%b%b  ✓ All checks passed. Ready to run:%b\n' "$C_GREEN" "$C_BOLD" "$C_RESET"
-    printf '    sudo %s/%s --audit\n\n' "${SCRIPT_DIR}" "${CONTROLLER_NAME}"
+    printf '    sudo %s/%s --audit\n\n' "${BASE_DIR}" "${CONTROLLER_NAME}"
     exit 0
 else
     printf '\n%b%b  ✗ %d check(s) failed. Review the output above.%b\n\n' \

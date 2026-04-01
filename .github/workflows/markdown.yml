@@ -25,20 +25,23 @@ jobs:
   markdownlint:
     name: Lint Markdown files
     runs-on: ubuntu-latest
-    container:
-      image: debian:trixie
 
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
       - name: 📦 Install Node.js & markdownlint-cli
+        shell: bash 
         run: |
-          apt-get update -qq
-          apt-get install -y --no-install-recommends nodejs npm
           npm install -g markdownlint-cli
 
       - name: 📝 Run markdownlint on all .md files
+        shell: bash 
         run: |
           markdownlint \
             --config .github/markdownlint.json \
@@ -65,8 +68,12 @@ jobs:
             --no-progress
             --exclude "^https://placehold\\.co"
             --exclude "^mailto:"
-            --exclude "^https://discord\\.com"
-            --exclude "^https://github\\.com/.*issues\\?q=label"
-            --exclude "file://"
+            --exclude "^file://"
+            --exclude "^https://discord\.com"
+            --exclude "^https://github\.com/.*/issues\?q="
+            --exclude "^https://github\.com/.*/issues/new"
+            --exclude "^https://github\.com/.*/security/advisories/new"
+            --exclude "^https://github\.com/.*/settings"
+            --exclude "^https://github\.com/.*/compare"
             "**/*.md"
           fail: true

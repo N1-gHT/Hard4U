@@ -1,23 +1,4 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/Debian-13-A81D33?style=flat-square&logo=debian&logoColor=white" alt="Debian 13">
-  <img src="https://img.shields.io/badge/Language-Bash-4EAA25?style=flat-square&logo=gnu-bash&logoColor=white" alt="Bash">
-  <img src="https://img.shields.io/badge/Standard-CIS_Benchmark-00447C?style=flat-square" alt="CIS Benchmark">
-  <img src="https://img.shields.io/badge/Version-v0.1.0-orange?style=flat-square" alt="Version">
-  <img src="https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square" alt="License: GPL v3">
-  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
-</p>
-
-<h1 align="center">🛡️ Hard4U</h1>
-
-<p align="center">
-  <strong>Automated CIS Benchmark Hardening Scripts for Debian 13</strong><br>
-  Audit, remediate and verify your system's security posture — automatically.
-</p>
-
-<p align="center">
-  <!-- Replace with your actual demo GIF once available -->
-  <img src="https://placehold.co/860x440/1a1a2e/39d353?text=Hard4U+Demo+(GIF+coming+soon)" alt="Hard4U demo" width="860">
-</p>
+<p align="center"> <img src="https://img.shields.io/badge/Debian-13-A81D33?style=flat-square&logo=debian&logoColor=white" alt="Debian 13"> <img src="https://img.shields.io/badge/Language-Bash-4EAA25?style=flat-square&logo=gnu-bash&logoColor=white" alt="Bash"> <img src="https://img.shields.io/badge/Standard-CIS_Benchmark-00447C?style=flat-square" alt="CIS Benchmark"> <img src="https://img.shields.io/badge/Version-v0.1.0-orange?style=flat-square" alt="Version"> <img src="https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square" alt="License: GPL v3"> <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"> </p> <h1 align="center">Hard4U</h1> <p align="center"> <strong>Automated CIS Benchmark Hardening Scripts for Debian 13</strong><br> Audit, remediate and verify your system's security posture — automatically. </p> <p align="center"> <!-- Replace with your actual demo GIF once available --> <img src="https://placehold.co/860x440/1a1a2e/39d353?text=Hard4U+Demo+(GIF+coming+soon)" alt="Hard4U demo" width="860"> </p>
 
 ---
 
@@ -25,9 +6,9 @@
 
 ```bash
 git clone https://github.com/N1-gHT/Hard4U.git && cd Hard4U
-chmod +x controller.sh modules/*.sh
-sudo ./controller.sh --audit        # Dry-run — no changes made
-sudo ./controller.sh --auto         # Audit → Fix → Verify
+chmod +x Hardening_Controller.sh modules/*.sh
+sudo ./Hardening_Controller.sh --audit        # Dry-run — no changes made
+sudo ./Hardening_Controller.sh --auto         # Audit → Fix → Verify
 
 ```
 
@@ -38,21 +19,21 @@ sudo ./controller.sh --auto         # Audit → Fix → Verify
 ## Table of Contents
 
 - [⚡ Quick Start](#-quick-start)
-- [⚠️ Important Disclaimer](#️-important-disclaimer)
+- [⚠️ Important Disclaimer](#%EF%B8%8F-important-disclaimer)
 - [📖 About the Project](#-about-the-project)
-  - [Origin & Reference](#origin--reference)
-  - [Objectives](#objectives)
+    - [Origin & Reference](#origin--reference)
+    - [Objectives](#objectives)
 - [✅ Prerequisites](#-prerequisites)
 - [📦 Installation](#-installation)
-  - [Quick Install (One-liner)](#quick-install-one-liner)
-  - [Manual Installation](#manual-installation)
+    - [Quick Install (One-liner)](#quick-install-one-liner)
+    - [Manual Installation](#manual-installation)
 - [🚀 Usage](#-usage)
-  - [Command-Line Options](#command-line-options)
-  - [Interactive Mode](#interactive-mode)
-  - [Configuration (Global Variables)](#configuration-global-variables)
-- [🗂️ Project Architecture](#️-project-architecture)
+    - [Command-Line Options](#command-line-options)
+    - [Interactive Mode](#interactive-mode)
+    - [Configuration (Global Variables)](#configuration-global-variables)
+- [🗂️ Project Architecture](#%EF%B8%8F-project-architecture)
 - [📊 CIS Modules Coverage](#-cis-modules-coverage)
-- [🗺️ Roadmap & Future Developments](#️-roadmap--future-developments)
+- [🗺️ Roadmap & Future Developments](#%EF%B8%8F-roadmap--future-developments)
 - [📋 Changelog](#-changelog)
 - [🤝 Contributing](#-contributing)
 - [❓ FAQ](#-faq)
@@ -64,24 +45,24 @@ sudo ./controller.sh --auto         # Audit → Fix → Verify
 
 ## ⚠️ Important Disclaimer
 
-> [!WARNING]
-> This project provides a set of hardening scripts based on the **CIS Benchmark for Debian 13** published by the Center for Internet Security.
->
+> [!WARNING] This project provides a set of hardening scripts based on the **CIS Benchmark for Debian 13** published by the Center for Internet Security.
+> 
 > These scripts are provided **"as is"**, without warranty of any kind, express or implied, including but not limited to warranties of fitness for a particular purpose or non-infringement.
->
+> 
 > Running these scripts may significantly modify system configuration (services, access controls, network settings, authentication mechanisms, permissions, etc.) and may result in:
+> 
 > - Loss of access (including SSH access)
 > - Service disruption
 > - Application incompatibilities
 > - Performance impacts
->
+> 
 > ### Before Using
+> 
 > - Test thoroughly in a **lab or staging environment**.
 > - Perform **full system backups** before execution.
 > - Review and adapt the scripts to fit your specific environment and requirements.
->
-> The author shall not be held liable for any damages, data loss, service interruption, or other issues arising from the use or misuse of these scripts.
-> **Use at your own risk.**
+> 
+> The author shall not be held liable for any damages, data loss, service interruption, or other issues arising from the use or misuse of these scripts. **Use at your own risk.**
 
 ---
 
@@ -95,21 +76,21 @@ sudo ./controller.sh --auto         # Audit → Fix → Verify
 
 ### Objectives
 
-| Goal | Description |
-|------|-------------|
-| 🔍 **Audit** | Quickly verify if your Debian 13 system complies with CIS recommendations — read-only, no changes made |
-| 🔧 **Remediate** | Automatically fix non-compliant settings with a single command |
-| 🧩 **Modularity** | Run checks on specific components or launch a full global audit via the controller |
+| Goal           | Description                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------ |
+| **Audit**      | Quickly verify if your Debian 13 system complies with CIS recommendations — read-only, no changes made |
+| **Remediate**  | Automatically fix non-compliant settings with a single command                                         |
+| **Modularity** | Run checks on specific components or launch a full global audit via the controller                     |
 
 ---
 
 ## ✅ Prerequisites
 
-| Requirement | Details |
-|-------------|---------|
-| **OS** | Debian 13 (Trixie) |
-| **Privileges** | Root access (`sudo` or native `root` user) |
-| **Dependencies** | `bash`, `awk`, `grep` — pre-installed on Debian by default |
+|Requirement|Details|
+|---|---|
+|**OS**|Debian 13 (Trixie)|
+|**Privileges**|Root access (`sudo` or native `root` user)|
+|**Dependencies**|`bash`, `awk`, `grep` — pre-installed on Debian by default|
 
 ---
 
@@ -117,8 +98,7 @@ sudo ./controller.sh --auto         # Audit → Fix → Verify
 
 ### Quick Install (One-liner)
 
-> [!NOTE]
-> The one-liner installer will be available once the initial stable release is published. Track progress on the [Roadmap](#️-roadmap--future-developments).
+> [!NOTE] The one-liner installer will be available once the initial stable release is published. Track progress on the [Roadmap](#%EF%B8%8F-roadmap--future-developments).
 
 ```bash
 curl -sL https://raw.githubusercontent.com/N1-gHT/Hard4U/main/install.sh | sudo bash
@@ -134,7 +114,7 @@ git clone https://github.com/N1-gHT/Hard4U.git
 cd Hard4U
 
 # Make the scripts executable
-chmod +x controller.sh modules/*.sh
+chmod +x Hardening_Controller.sh modules/*.sh
 ```
 
 ---
@@ -143,28 +123,27 @@ chmod +x controller.sh modules/*.sh
 
 Hard4U is highly flexible. Use the master **controller** to orchestrate all modules, or run **independent modules** one by one.
 
-> [!TIP]
-> All modules are **idempotent** — running them multiple times on an already-hardened system is safe and will not cause unintended side effects. A re-run simply confirms compliance.
+> [!TIP] All modules are **idempotent** — running them multiple times on an already-hardened system is safe and will not cause unintended side effects. A re-run simply confirms compliance.
 
 ### Command-Line Options
 
 Every script supports the following arguments for automated/CI execution:
 
-| Flag | Description |
-|------|-------------|
-| `--audit` | Run compliance checks only — **no changes made** to the system |
-| `--remediation` | Apply security configurations (fixes non-compliant items) |
-| `--auto` | Full pipeline: Audit → Fix → Re-Audit to verify |
-| `--help` / `-h` | Display the help message |
+|Flag|Description|
+|---|---|
+|`--audit`|Run compliance checks only — **no changes made** to the system|
+|`--remediation`|Apply security configurations (fixes non-compliant items)|
+|`--auto`|Full pipeline: Audit → Fix → Re-Audit to verify|
+|`--help` / `-h`|Display the help message|
 
 **Examples:**
 
 ```bash
 # Run a dry-run audit on the GRUB module
-sudo ./modules/Hardening-4_Bootloader.sh --audit
+sudo ./modules/Hardening_4-Bootloader.sh --audit
 
 # Auto-remediate privilege escalation settings
-sudo ./modules/Hardening-18_SUDO.sh --auto
+sudo ./modules/Hardening_18-Sudo.sh --auto
 
 # Run the full controller in auto mode
 sudo ./Hardening_Controller.sh --auto
@@ -196,7 +175,7 @@ Each module displays its own CIS section header, making it easy to identify whic
 
 Before running the scripts, **review and adjust** the variables at the top of each module to match your environment. Each module contains a `# --- Global Variables ---` section.
 
-**Privilege Escalation module (`2_privilege.sh`):**
+**Privilege Escalation module (`Hardening_18-Sudo.sh`):**
 
 ```bash
 readonly SUDO_PKG="sudo"
@@ -214,7 +193,7 @@ readonly PAM_SU_FILE="/etc/pam.d/su"
 readonly SU_RESTRICT_GROUP="sugroup"
 ```
 
-**Bootloader module (`1_bootloader.sh`):**
+**Bootloader module (`Hardening_4-Bootloader.sh`):**
 
 ```bash
 readonly GRUB_USER="root"
@@ -286,17 +265,17 @@ Each module is **fully self-contained** and implements three core functions:
 
 ## 📊 CIS Modules Coverage
 
-| # | Module | Status | CIS Section | Level |
-|---|--------|:------:|-------------|:-----:|
-| 1 | Filesystem & Partitions | 🚧 In Progress | CIS 1.x | L1/L2 |
-| 2 | Bootloader (GRUB) | ✅ Available | CIS 1.x | L1 |
-| 3 | Privilege Escalation (sudo/su) | ✅ Available | CIS 5.x | L1 |
-| 4 | Network Configuration | ✅ Available | CIS 3.x | L1 |
-| 5 | Logging & Auditing (auditd) | ✅ Available | CIS 4.x | L2 |
-| 6 | Access Control (PAM, SSH) | ✅ Available | CIS 5.x | L1/L2 |
-| 7 | System Maintenance | ✅ Available | CIS 6.x | L1 |
+|#|Module|Status|CIS Section|Level|
+|---|---|:-:|---|:-:|
+|1|Filesystem & Partitions|🚧 In Progress|CIS 1.x|L1/L2|
+|2|Bootloader (GRUB)|✅ Available|CIS 1.x|L1|
+|3|Privilege Escalation (sudo/su)|✅ Available|CIS 5.x|L1|
+|4|Network Configuration|✅ Available|CIS 3.x|L1|
+|5|Logging & Auditing (auditd)|✅ Available|CIS 4.x|L2|
+|6|Access Control (PAM, SSH)|✅ Available|CIS 5.x|L1/L2|
+|7|System Maintenance|✅ Available|CIS 6.x|L1|
 
-> **Legend:** ✅ Available &nbsp;|&nbsp; 🚧 In Progress &nbsp;|&nbsp; 🔜 Planned
+> **Legend:** ✅ Available  |  🚧 In Progress  |  🔜 Planned
 
 ---
 
@@ -312,15 +291,12 @@ Each module is **fully self-contained** and implements three core functions:
 
 ## 📋 Changelog
 
-All notable changes to this project are documented here.  
-This project adheres to [Semantic Versioning](https://semver.org/).
+All notable changes to this project are documented here. This project adheres to [Semantic Versioning](https://semver.org/).
 
-### [v0.1.0] — 2026-XX-XX *(Initial Release)*
+### [v0.1.0] — 2026-03-29 _(Initial Release)_
 
 #### Added
-### [v0.1.0] — 2026-03-29 *(Initial Release)*
- 
-#### Added
+
 - `Hardening_Controller.sh` — master orchestration script with interactive menu
 - `Hardening_1-Kernel_FS.sh` — filesystem & kernel parameter hardening
 - `Hardening_2-APT.sh` — APT package manager hardening
@@ -371,72 +347,60 @@ Please open an **[Issue](https://github.com/N1-gHT/Hard4U/issues/new/choose)** f
 
 ## ❓ FAQ
 
-<details>
-<summary><strong>Is it safe to run the scripts multiple times on an already-hardened system?</strong></summary>
+<details> <summary><strong>Is it safe to run the scripts multiple times on an already-hardened system?</strong></summary>
 
 Yes. All modules are designed to be **idempotent** — re-running a remediation on a system that is already compliant will detect that settings are already in place and make no unnecessary changes. Running `--audit` after `--remediation` is the recommended way to confirm everything is applied correctly.
-</details>
 
-<details>
-<summary><strong>Can I run Hard4U on Debian 12 (Bookworm) or other distributions?</strong></summary>
+</details> <details> <summary><strong>Can I run Hard4U on Debian 12 (Bookworm) or other distributions?</strong></summary>
 
 Hard4U is designed and tested specifically for **Debian 13 (Trixie)**. While some modules may partially work on Debian 12, compatibility is not guaranteed. Multi-distribution support (RedHat/AlmaLinux/RockyLinux) is on the roadmap.
-</details>
 
-<details>
-<summary><strong>Will the audit mode change anything on my system?</strong></summary>
+</details> <details> <summary><strong>Will the audit mode change anything on my system?</strong></summary>
 
 No. Running `--audit` is strictly **read-only**. It checks the current state of your system against CIS recommendations and reports findings without applying any changes.
-</details>
 
-<details>
-<summary><strong>I lost SSH access after running a remediation. What do I do?</strong></summary>
+</details> <details> <summary><strong>I lost SSH access after running a remediation. What do I do?</strong></summary>
 
 This is a known risk when applying SSH hardening rules. You will need physical or console access to your machine to revert the SSH configuration. This is why testing in a **lab environment first** is strongly recommended. A rollback feature is planned for a future release.
-</details>
 
-<details>
-<summary><strong>Does Hard4U support CIS Level 1 and Level 2 separately?</strong></summary>
+</details> <details> <summary><strong>Does Hard4U support CIS Level 1 and Level 2 separately?</strong></summary>
 
-Not yet — all rules are applied by default regardless of level. Granular Level 1 / Level 2 profile selection is on the [roadmap](#️-roadmap--future-developments).
-</details>
+Not yet — all rules are applied by default regardless of level. Granular Level 1 / Level 2 profile selection is on the [roadmap](#%EF%B8%8F-roadmap--future-developments).
 
-<details>
-<summary><strong>Can I run individual modules without the controller?</strong></summary>
+</details> <details> <summary><strong>Can I run individual modules without the controller?</strong></summary>
 
 Yes! Every module is fully self-contained and can be executed independently:
 
 ```bash
-sudo ./modules/5_access_control.sh --audit
+sudo ./modules/Hardening_1-Kernel_FS.sh --audit
 ```
+
 </details>
 
 ---
 
 ## 📚 References
 
-| Resource | Description |
-|----------|-------------|
-| 📄 [CIS Benchmark for Debian 13](./docs/CIS_Debian13.pdf) | The full CIS Benchmark PDF included in this repository |
-| 🌐 [CIS Official Website](https://www.cisecurity.org/) | Center for Internet Security — source of the benchmark standards |
-| 🌐 [CIS Benchmark Downloads](https://www.cisecurity.org/cis-benchmarks) | Download the latest official CIS Benchmarks |
+| Resource                                                                | Description                                                      |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| 📄 [CIS Benchmark for Debian 13](./docs/CIS_Debian13.pdf)               | The full CIS Benchmark PDF included in this repository           |
+| 🌐 [CIS Official Website](https://www.cisecurity.org/)                  | Center for Internet Security — source of the benchmark standards |
+| 🌐 [CIS Benchmark Downloads](https://www.cisecurity.org/cis-benchmarks) | Download the latest official CIS Benchmarks                      |
 
-> [!NOTE]
-> The CIS Benchmark PDF is included in this repository for reference convenience. It remains the intellectual property of the **Center for Internet Security**. Please refer to [CIS terms of use](https://www.cisecurity.org/terms-and-conditions-table-of-contents) for usage rights.
+> [!NOTE] The CIS Benchmark PDF is included in this repository for reference convenience. It remains the intellectual property of the **Center for Internet Security**. Please refer to [CIS terms of use](https://www.cisecurity.org/terms-and-conditions-table-of-contents) for usage rights.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **GNU General Public License v3.0**.  
-See the [LICENSE](https://github.com/N1-gHT/Hard4U/blob/main/LICENSE) file for full details.
+This project is licensed under the **GNU General Public License v3.0**. See the [LICENSE](https://github.com/N1-gHT/Hard4U/blob/main/LICENSE) file for full details.
 
 ---
 
 ## 💬 Contact & Support
 
-| Channel | Link |
-|---------|------|
-| 🐛 **GitHub Issues** | [Open an issue](https://github.com/N1-gHT/Hard4U/issues/new/choose) |
-| 💬 **Discord** | `n1h_` |
-| 📧 **Email** | [contact@n1ght.fr](mailto:contact@n1ght.fr) |
+|Channel|Link|
+|---|---|
+|🐛 **GitHub Issues**|[Open an issue](https://github.com/N1-gHT/Hard4U/issues/new/choose)|
+|💬 **Discord**|`n1h_`|
+|📧 **Email**|[contact@n1ght.fr](mailto:contact@n1ght.fr)|
