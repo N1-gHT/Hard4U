@@ -46,22 +46,22 @@ sudo ./Hardening_Controller.sh --auto         # Audit → Fix → Verify
 ## ⚠️ Important Disclaimer
 
 > [!WARNING] This project provides a set of hardening scripts based on the **CIS Benchmark for Debian 13** published by the Center for Internet Security.
-> 
+>
 > These scripts are provided **"as is"**, without warranty of any kind, express or implied, including but not limited to warranties of fitness for a particular purpose or non-infringement.
-> 
+>
 > Running these scripts may significantly modify system configuration (services, access controls, network settings, authentication mechanisms, permissions, etc.) and may result in:
-> 
+>
 > - Loss of access (including SSH access)
 > - Service disruption
 > - Application incompatibilities
 > - Performance impacts
-> 
+>
 > ### Before Using
-> 
+>
 > - Test thoroughly in a **lab or staging environment**.
 > - Perform **full system backups** before execution.
 > - Review and adapt the scripts to fit your specific environment and requirements.
-> 
+>
 > The author shall not be held liable for any damages, data loss, service interruption, or other issues arising from the use or misuse of these scripts. **Use at your own risk.**
 
 ---
@@ -157,7 +157,7 @@ Running a script without any arguments launches a user-friendly interactive menu
 sudo ./Hardening_Controller.sh
 ```
 
-```
+```text
 ========== CIS 5.4: User Accounts and Environment ==========
 
 --- CIS 5.4 User Accounts -- Select Operation Mode ---
