@@ -31,7 +31,7 @@ This project is welcoming to everyone. Please be respectful and constructive in 
 Not sure where to start? Here are all the ways you can help:
 
 | Type | Description |
-|------|-------------|
+| ------ | ------------- |
 | 🐛 **Bug fix** | Found something broken? Fix it and open a PR |
 | 🧩 **New module** | Implement a missing CIS section (check the [Roadmap](README.md#️-roadmap--future-developments)) |
 | 📖 **Documentation** | Improve the README, fix typos, clarify instructions |
@@ -55,7 +55,7 @@ Not sure where to start? Here are all the ways you can help:
 ### Requirements
 
 | Tool | Purpose | Install |
-|------|---------|---------|
+| ------ | --------- | --------- |
 | **Debian 13** (VM recommended) | Test environment | [Download](https://www.debian.org/) |
 | **ShellCheck** | Bash linter | `sudo apt install shellcheck` |
 | **Git** | Version control | `sudo apt install git` |
@@ -98,7 +98,7 @@ Recommended testing workflow:
 ### Branch Naming
 
 | Type | Format | Example |
-|------|--------|---------|
+| ------ | -------- | --------- |
 | New feature / module | `feature/<name>` | `feature/add-filesystem-module` |
 | Bug fix | `fix/<name>` | `fix/ssh-remediation-crash` |
 | Documentation | `docs/<name>` | `docs/update-contributing` |
@@ -115,14 +115,14 @@ git checkout -b feature/your-feature-name
 
 This project uses the **[Conventional Commits](https://www.conventionalcommits.org/)** format. This is required as it powers the automatic changelog generation.
 
-```
+```text
 <type>: <short description>
 
 [optional body]
 ```
 
 | Type | When to use |
-|------|-------------|
+| ------ | ------------- |
 | `feat:` | Adding a new feature or module |
 | `fix:` | Fixing a bug |
 | `docs:` | Documentation changes only |
@@ -438,6 +438,7 @@ In your PR description, fill in the provided template completely — incomplete 
 Open an Issue using the **Bug Report** template and fill in all the fields. The more detail you provide, the faster the fix.
 
 Please include:
+
 - The module and flag used (e.g. `5_access_control.sh --remediation`)
 - Your Debian 13 version (`cat /etc/os-release`)
 - The exact error message or unexpected behaviour
@@ -448,6 +449,7 @@ Please include:
 ## Proposing a Feature
 
 Open an Issue using the **Feature Request** template. Describe:
+
 - What problem does it solve?
 - Which CIS section does it relate to?
 - Any implementation ideas you already have

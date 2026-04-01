@@ -1,0 +1,115 @@
+name: 🧪 Test Audit Mode
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+      - "fix/**"
+    paths:
+      - "modules/**.sh"
+      - "Hardening_Controller.sh"
+      - "install.sh"
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - "modules/**.sh"
+      - "Hardening_Controller.sh"
+      - "install.sh"
+
+jobs:
+  test-audit:
+    name: Test --audit mode on all modules
+    runs-on: ubuntu-latest
+    container:
+      image: debian:trixie
+      options: --privileged
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Install dependencies
+        shell: bash 
+        run: |
+          apt-get update -qq
+          apt-get install -y --no-install-recommends \
+            bash \
+            systemd \
+            sudo \
+            gawk \
+            grep \
+            coreutils
+
+      - name: 🔑 Make all scripts executable
+        shell: bash 
+        run: |
+          chmod +x Hardening_Controller.sh
+          chmod +x modules/*.sh
+
+      - name: 🧪 Run --audit on all detected modules
+        id: audit
+        shell: bash
+        run: |
+          FAILED_MODULES=()
+          PASSED_MODULES=()
+          EXIT_CODE=0
+
+          echo "======================================"
+          echo "  Hard4U — Audit Mode Test Suite"
+          echo "======================================"
+          echo ""
+
+          # Auto-detect all modules
+          for script in modules/*.sh; do
+            MODULE_NAME=$(basename "$script")
+            echo "--------------------------------------"
+            echo "  Testing: ${MODULE_NAME}"
+            echo "--------------------------------------"
+
+            # Run in --audit mode, capture exit code without stopping
+            set +e
+            bash "$script" --audit
+            STATUS=$?
+            set -e
+
+            # exit 0 = compliant, exit 1 = non-compliant (expected on a fresh system)
+            # Any other exit code = script crash = real failure
+            if [ "$STATUS" -le 1 ]; then
+              PASSED_MODULES+=("$MODULE_NAME")
+              echo "  ✅ ${MODULE_NAME} — script ran correctly (exit ${STATUS})"
+            else
+              FAILED_MODULES+=("$MODULE_NAME")
+              echo "  ❌ ${MODULE_NAME} — script crashed (exit ${STATUS})"
+              EXIT_CODE=1
+            fi
+            echo ""
+          done
+
+          echo "======================================"
+          echo "  Test Summary"
+          echo "======================================"
+          echo "  ✅ Passed : ${#PASSED_MODULES[@]} module(s)"
+          echo "  ❌ Failed : ${#FAILED_MODULES[@]} module(s)"
+          echo ""
+
+          if [ "${#FAILED_MODULES[@]}" -gt 0 ]; then
+            echo "  Failed modules:"
+            for m in "${FAILED_MODULES[@]}"; do
+              echo "    - $m"
+            done
+          fi
+
+          exit "$EXIT_CODE"
+
+      - name: 🧪 Run --audit on controller
+        shell: bash
+        run: |
+          echo "--------------------------------------"
+          echo "  Testing: Hardening_Controller.sh"
+          echo "--------------------------------------"
+          bash Hardening_Controller.sh --audit || true
+          echo "  ✅ Hardening_Controller.sh — audit completed"

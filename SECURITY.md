@@ -9,7 +9,7 @@ Security is a top priority for this project, especially given its role in automa
 Only the latest version on `main` is actively supported and receives security updates.
 
 | Version | Supported |
-|:--------|:---------:|
+| :-------- | :---------: |
 | Latest (`main`) | ✅ |
 | Older releases | ❌ |
 
@@ -49,7 +49,7 @@ To help me investigate and resolve the issue efficiently, please provide:
 I follow a **Responsible Disclosure** process:
 
 | Step | Timeframe |
-|------|-----------|
+| ------ | ----------- |
 | Acknowledgement of your report | Within **1 week** |
 | Status update (confirmed / investigating) | Within **2 weeks** |
 | Fix & public advisory | Depends on severity and complexity |

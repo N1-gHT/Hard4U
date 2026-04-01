@@ -1,0 +1,79 @@
+name: 📝 Markdown Validation
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+      - "fix/**"
+      - "docs/**"
+    paths:
+      - "**.md"
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - "**.md"
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Job 1 — Markdownlint
+  # Checks: syntax, heading structure (h1 → h3 without h2), trailing spaces
+  # ---------------------------------------------------------------------------
+  markdownlint:
+    name: Lint Markdown files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: 📦 Install Node.js & markdownlint-cli
+        shell: bash 
+        run: |
+          npm install -g markdownlint-cli
+
+      - name: 📝 Run markdownlint on all .md files
+        shell: bash 
+        run: |
+          markdownlint \
+            --config .github/markdownlint.json \
+            "**/*.md" \
+            --ignore node_modules
+
+  # ---------------------------------------------------------------------------
+  # Job 2 — Dead link checker
+  # Checks all URLs in .md files are reachable
+  # ---------------------------------------------------------------------------
+  link-check:
+    name: Check for dead links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔗 Check links in all Markdown files
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >
+            --verbose
+            --no-progress
+            --exclude "^https://placehold\\.co"
+            --exclude "^mailto:"
+            --exclude "^file://"
+            --exclude "^https://discord\.com"
+            --exclude "^https://github\.com/.*/issues\?q="
+            --exclude "^https://github\.com/.*/issues/new"
+            --exclude "^https://github\.com/.*/security/advisories/new"
+            --exclude "^https://github\.com/.*/settings"
+            --exclude "^https://github\.com/.*/compare"
+            "**/*.md"
+          fail: true
