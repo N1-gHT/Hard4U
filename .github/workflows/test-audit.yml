@@ -19,7 +19,10 @@ on:
       - "modules/**.sh"
       - "Hardening_Controller.sh"
       - "install.sh"
+<<<<<<< HEAD
   workflow_dispatch:
+=======
+>>>>>>> 8070f89 (fix: adding install.sh and trigger workflows)
 
 jobs:
   test-audit:
