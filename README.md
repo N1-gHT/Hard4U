@@ -294,7 +294,11 @@ Each module is **fully self-contained** and implements three core functions:
 
 All notable changes to this project are documented here. This project adheres to [Semantic Versioning](https://semver.org/).
 
+<<<<<<< HEAD
 ### [v1.0.1] — 2026-04-01 _(Initial Release)_
+=======
+### [v1.0.0] — 2026-04-01 _(Initial Release)_
+>>>>>>> 7b8ac40 (feat!: initial stable release v1.0.0)
 
 #### Added
 
