@@ -161,6 +161,7 @@ sudo ./Hardening_Controller.sh
 ========== CIS 5.4: User Accounts and Environment ==========
 
 --- CIS 5.4 User Accounts -- Select Operation Mode ---
+
 1) Audit Only       (Check compliance, no changes)
 2) Remediation Only (Apply user accounts and environment hardening)
 3) Auto             (Audit, fix if needed, then verify)
