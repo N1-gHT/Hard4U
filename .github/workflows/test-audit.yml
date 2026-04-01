@@ -10,6 +10,7 @@ on:
     paths:
       - "modules/**.sh"
       - "Hardening_Controller.sh"
+      - "install.sh"
   pull_request:
     branches:
       - main
@@ -17,6 +18,7 @@ on:
     paths:
       - "modules/**.sh"
       - "Hardening_Controller.sh"
+      - "install.sh"
 
 jobs:
   test-audit:
