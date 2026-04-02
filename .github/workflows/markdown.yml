@@ -76,5 +76,6 @@ jobs:
             --exclude "^https://github\.com/.*/security/advisories/new"
             --exclude "^https://github\.com/.*/settings"
             --exclude "^https://github\.com/.*/compare"
+            --exclude "^https://www.contributor-covenant\.org/faq"
             "**/*.md"
           fail: true
