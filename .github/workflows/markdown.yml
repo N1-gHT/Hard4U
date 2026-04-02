@@ -10,12 +10,16 @@ on:
       - "docs/**"
     paths:
       - "**.md"
+      - ".github/**"
+      - ".gitignore"
   pull_request:
     branches:
       - main
       - develop
     paths:
       - "**.md"
+      - ".github/**"
+      - ".gitignore"
   workflow_dispatch:
 
 jobs:
