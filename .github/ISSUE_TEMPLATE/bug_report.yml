@@ -18,13 +18,36 @@ body:
       label: 🧩 Affected Module
       description: Which module is the bug related to?
       options:
-        - controller.sh (Master script)
-        - 1_bootloader.sh (Bootloader / GRUB)
-        - 2_privilege.sh (Privilege Escalation)
-        - 3_network.sh (Network Configuration)
-        - 4_logging.sh (Logging & Auditing)
-        - 5_access_control.sh (Access Control / PAM / SSH)
-        - 6_maintenance.sh (System Maintenance)
+        - Hardening_Controller.sh (Master script)
+        - Hardening_1-Kernel_FS.sh (Filesystem & Kernel Parameters)
+        - Hardening_2-APT.sh (Package Management)
+        - Hardening_3-AppArmor.sh (Mandatory Access Control)
+        - Hardening_4-Bootloader.sh (Bootloader / GRUB)
+        - Hardening_5-Additional_Process.sh (Additional Process Hardening)
+        - Hardening_6-Banners.sh (Warning Banners)
+        - Hardening_7-GDM.sh (GNOME Display Manager)
+        - Hardening_8-Server_Service.sh (Server Services)
+        - Hardening_9-Client_Services.sh (Client Services)
+        - Hardening_10-Systemd_Timesyncd.sh (Time Synchronization / systemd)
+        - Hardening_11-Chrony.sh (Time Synchronization / chrony)
+        - Hardening_12-Job_Scheduler.sh (Cron & Job Scheduling)
+        - Hardening_13-Network_1.sh (Network Stack Hardening pt.1)
+        - Hardening_14-Network_2.sh (Network Stack Hardening pt.2)
+        - Hardening_15-Firewall.sh (Firewall / nftables / iptables)
+        - Hardening_16-SSH.sh (SSH Server Hardening)
+        - Hardening_17-SSH_Conf.sh (SSH Configuration)
+        - Hardening_18-Sudo.sh (Sudo & su Restrictions)
+        - Hardening_19-PAM_1.sh (PAM Configuration pt.1)
+        - Hardening_20-PAM_2.sh (PAM Configuration pt.2)
+        - Hardening_21-Accounts.sh (User Accounts & Environment)
+        - Hardening_22-Journald.sh (Journald Logging)
+        - Hardening_23-Rsyslog.sh (Rsyslog Configuration)
+        - Hardening_24-Auditd_1.sh (Auditd Rules pt.1)
+        - Hardening_25-Auditd_2.sh (Auditd Rules pt.2)
+        - Hardening_26-Auditd_3.sh (Auditd Rules pt.3)
+        - Hardening_27-AIDE.sh (File Integrity / AIDE)
+        - Hardening_28-System_Access.sh (System Access Controls)
+        - Hardening_29-User_Settings.sh (User Environment Settings)
         - Other / Unknown
     validations:
       required: true
@@ -101,7 +124,7 @@ body:
         Tip: you can enable debug mode with `sudo SCRIPT_DEBUG=true bash ./modules/<module>.sh --audit`
       render: shell
       placeholder: |
-        $ sudo ./modules/4_logging.sh --audit
+        $ sudo ./modules/Hardening_22-Journald.sh --audit
         ...
     validations:
       required: true
