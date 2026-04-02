@@ -11,6 +11,8 @@ on:
       - "modules/**.sh"
       - "Hardening_Controller.sh"
       - "install.sh"
+      - ".github/**"
+      - ".gitignore"
   pull_request:
     branches:
       - main
@@ -19,6 +21,8 @@ on:
       - "modules/**.sh"
       - "Hardening_Controller.sh"
       - "install.sh"
+      - ".github/**"
+      - ".gitignore"
   workflow_dispatch:
 
 jobs:
