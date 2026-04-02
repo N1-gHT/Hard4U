@@ -45,7 +45,7 @@ sudo ./Hardening_Controller.sh --auto         # Audit → Fix → Verify
 
 ## ⚠️ Important Disclaimer
 
-> [!WARNING] 
+> [!WARNING]
 > This project provides a set of hardening scripts based on the **CIS Benchmark for Debian 13** published by the Center for Internet Security.
 >
 > These scripts are provided **"as is"**, without warranty of any kind, express or implied, including but not limited to warranties of fitness for a particular purpose or non-infringement.
@@ -99,7 +99,7 @@ sudo ./Hardening_Controller.sh --auto         # Audit → Fix → Verify
 
 ### Quick Install (One-liner)
 
-> [!NOTE] 
+> [!NOTE]
 > The one-liner installer will be available once the initial stable release is published. Track progress on the [Roadmap](#%EF%B8%8F-roadmap--future-developments).
 
 ```bash
@@ -125,7 +125,7 @@ chmod +x Hardening_Controller.sh modules/*.sh
 
 Hard4U is highly flexible. Use the master **controller** to orchestrate all modules, or run **independent modules** one by one.
 
-> [!TIP] 
+> [!TIP]
 > All modules are **idempotent** — running them multiple times on an already-hardened system is safe and will not cause unintended side effects. A re-run simply confirms compliance.
 
 ### Command-Line Options
@@ -391,7 +391,7 @@ sudo ./modules/Hardening_1-Kernel_FS.sh --audit
 | 🌐 [CIS Official Website](https://www.cisecurity.org/)                  | Center for Internet Security — source of the benchmark standards |
 | 🌐 [CIS Benchmark Downloads](https://www.cisecurity.org/cis-benchmarks) | Download the latest official CIS Benchmarks                      |
 
-> [!NOTE] 
+> [!NOTE]
 > The CIS Benchmark PDF is included in this repository for reference convenience. It remains the intellectual property of the **Center for Internet Security**. Please refer to [CIS terms of use](https://www.cisecurity.org/terms-and-conditions-table-of-contents) for usage rights.
 
 ---
