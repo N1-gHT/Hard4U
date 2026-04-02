@@ -9,12 +9,16 @@ on:
       - "fix/**"
     paths:
       - "**.sh"
+      - ".github/**"
+      - ".gitignore"
   pull_request:
     branches:
       - main
       - develop
     paths:
       - "**.sh"
+      - ".github/**"
+      - ".gitignore"
   workflow_dispatch:
 
 jobs:
