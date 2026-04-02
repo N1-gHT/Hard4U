@@ -217,7 +217,6 @@ readonly -a GRUB_PASSWORD_PATTERNS=(
 
 Hard4U uses a modular architecture to allow granular control over what gets audited or modified.
 
-````markdown
 ```text
 Hard4U/
 ├── Hardening_Controller.sh              # Master script — orchestrates all modules
@@ -256,7 +255,6 @@ Hard4U/
     └── Hardening_29-User_Settings.sh    # User environment settings       (CIS 6.x)
     └── ...                   # Future modules
 ```text
-````markdown
 
 Each module is **fully self-contained** and implements three core functions:
 
@@ -296,7 +294,7 @@ Each module is **fully self-contained** and implements three core functions:
 
 All notable changes to this project are documented here. This project adheres to [Semantic Versioning](https://semver.org/).
 
-### [v1.0.0] — 2026-04-01 _(Initial Release)_
+### [v1.0.1] — 2026-04-01 _(Initial Release)_
 
 #### Added
 
