@@ -1,22 +1,16 @@
 name: 🧪 Test Audit Mode
 
 on:
+  pull_request:
+    branches:
+      - main
+      - develop
   push:
     branches:
       - main
       - develop
       - "feature/**"
       - "fix/**"
-    paths:
-      - "modules/**.sh"
-      - "Hardening_Controller.sh"
-      - "install.sh"
-      - ".github/**"
-      - ".gitignore"
-  pull_request:
-    branches:
-      - main
-      - develop
     paths:
       - "modules/**.sh"
       - "Hardening_Controller.sh"

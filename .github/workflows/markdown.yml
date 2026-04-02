@@ -1,6 +1,10 @@
 name: 📝 Markdown Validation
 
 on:
+  pull_request:
+    branches:
+      - main
+      - develop
   push:
     branches:
       - main
@@ -8,14 +12,6 @@ on:
       - "feature/**"
       - "fix/**"
       - "docs/**"
-    paths:
-      - "**.md"
-      - ".github/**"
-      - ".gitignore"
-  pull_request:
-    branches:
-      - main
-      - develop
     paths:
       - "**.md"
       - ".github/**"

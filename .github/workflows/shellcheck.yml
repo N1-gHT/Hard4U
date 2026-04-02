@@ -1,20 +1,16 @@
 name: 🔍 ShellCheck
 
 on:
+  pull_request:
+    branches:
+      - main
+      - develop
   push:
     branches:
       - main
       - develop
       - "feature/**"
       - "fix/**"
-    paths:
-      - "**.sh"
-      - ".github/**"
-      - ".gitignore"
-  pull_request:
-    branches:
-      - main
-      - develop
     paths:
       - "**.sh"
       - ".github/**"
