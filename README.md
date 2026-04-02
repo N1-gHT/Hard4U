@@ -45,7 +45,8 @@ sudo ./Hardening_Controller.sh --auto         # Audit → Fix → Verify
 
 ## ⚠️ Important Disclaimer
 
-> [!WARNING] This project provides a set of hardening scripts based on the **CIS Benchmark for Debian 13** published by the Center for Internet Security.
+> [!WARNING]
+> This project provides a set of hardening scripts based on the **CIS Benchmark for Debian 13** published by the Center for Internet Security.
 >
 > These scripts are provided **"as is"**, without warranty of any kind, express or implied, including but not limited to warranties of fitness for a particular purpose or non-infringement.
 >
@@ -98,7 +99,8 @@ sudo ./Hardening_Controller.sh --auto         # Audit → Fix → Verify
 
 ### Quick Install (One-liner)
 
-> [!NOTE] The one-liner installer will be available once the initial stable release is published. Track progress on the [Roadmap](#%EF%B8%8F-roadmap--future-developments).
+> [!NOTE]
+> The one-liner installer will be available once the initial stable release is published. Track progress on the [Roadmap](#%EF%B8%8F-roadmap--future-developments).
 
 ```bash
 curl -sL https://raw.githubusercontent.com/N1-gHT/Hard4U/main/install.sh | sudo bash
@@ -123,7 +125,8 @@ chmod +x Hardening_Controller.sh modules/*.sh
 
 Hard4U is highly flexible. Use the master **controller** to orchestrate all modules, or run **independent modules** one by one.
 
-> [!TIP] All modules are **idempotent** — running them multiple times on an already-hardened system is safe and will not cause unintended side effects. A re-run simply confirms compliance.
+> [!TIP]
+> All modules are **idempotent** — running them multiple times on an already-hardened system is safe and will not cause unintended side effects. A re-run simply confirms compliance.
 
 ### Command-Line Options
 
@@ -254,7 +257,7 @@ Hard4U/
     ├── Hardening_28-System_Access.sh    # System access controls          (CIS 6.x)
     └── Hardening_29-User_Settings.sh    # User environment settings       (CIS 6.x)
     └── ...                   # Future modules
-```text
+```
 
 Each module is **fully self-contained** and implements three core functions:
 
@@ -309,7 +312,7 @@ All notable changes to this project are documented here. This project adheres to
 - `Hardening_8-Server_Service.sh` — server services hardening
 - `Hardening_9-Client_Services.sh` — client services hardening
 - `Hardening_10-Systemd_Timesyncd.sh` — systemd time synchronization
-- `Hardening_11-Chrony.sh` — chrony time synchronization
+- `Hardening_11-Chrony.sh` — chrony time synchronizatgit reset --hard origin/developion
 - `Hardening_12-Job_Scheduler.sh` — cron & at job scheduling controls
 - `Hardening_13-Network_1.sh` — network stack hardening (part 1)
 - `Hardening_14-Network_2.sh` — network stack hardening (part 2)
@@ -388,7 +391,8 @@ sudo ./modules/Hardening_1-Kernel_FS.sh --audit
 | 🌐 [CIS Official Website](https://www.cisecurity.org/)                  | Center for Internet Security — source of the benchmark standards |
 | 🌐 [CIS Benchmark Downloads](https://www.cisecurity.org/cis-benchmarks) | Download the latest official CIS Benchmarks                      |
 
-> [!NOTE] The CIS Benchmark PDF is included in this repository for reference convenience. It remains the intellectual property of the **Center for Internet Security**. Please refer to [CIS terms of use](https://www.cisecurity.org/terms-and-conditions-table-of-contents) for usage rights.
+> [!NOTE]
+> The CIS Benchmark PDF is included in this repository for reference convenience. It remains the intellectual property of the **Center for Internet Security**. Please refer to [CIS terms of use](https://www.cisecurity.org/terms-and-conditions-table-of-contents) for usage rights.
 
 ---
 
