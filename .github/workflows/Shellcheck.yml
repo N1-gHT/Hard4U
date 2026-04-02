@@ -1,0 +1,45 @@
+name: 🔍 ShellCheck
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+      - "fix/**"
+    paths:
+      - "**.sh"
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - "**.sh"
+
+jobs:
+  shellcheck:
+    name: Lint Bash scripts
+    runs-on: ubuntu-latest
+    container:
+      image: debian:trixie
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Install ShellCheck
+        run: |
+          apt-get update -qq
+          apt-get install -y --no-install-recommends shellcheck
+          shellcheck --version
+
+      - name: 🔍 Run ShellCheck on all scripts
+        run: |
+          echo "=== Scanning: controller.sh ==="
+          shellcheck controller.sh
+
+          echo "=== Scanning: modules/*.sh ==="
+          shellcheck modules/*.sh
+
+      - name: ✅ ShellCheck passed
+        run: echo "All scripts passed ShellCheck with no errors."
