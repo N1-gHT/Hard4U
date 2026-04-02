@@ -19,6 +19,7 @@ on:
       - "modules/**.sh"
       - "Hardening_Controller.sh"
       - "install.sh"
+  workflow_dispatch:
 
 jobs:
   test-audit:
