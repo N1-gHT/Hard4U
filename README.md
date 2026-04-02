@@ -99,9 +99,6 @@ sudo ./Hardening_Controller.sh --auto         # Audit → Fix → Verify
 
 ### Quick Install (One-liner)
 
-> [!NOTE]
-> The one-liner installer will be available once the initial stable release is published. Track progress on the [Roadmap](#%EF%B8%8F-roadmap--future-developments).
-
 ```bash
 curl -sL https://raw.githubusercontent.com/N1-gHT/Hard4U/main/install.sh | sudo bash
 ```
@@ -295,43 +292,7 @@ Each module is **fully self-contained** and implements three core functions:
 
 ## 📋 Changelog
 
-All notable changes to this project are documented here. This project adheres to [Semantic Versioning](https://semver.org/).
-
-### [v1.0.2] — 2026-04-01 _(Initial Release)_
-
-#### Added
-
-- `Hardening_Controller.sh` — master orchestration script with interactive menu
-- `Hardening_1-Kernel_FS.sh` — filesystem & kernel parameter hardening
-- `Hardening_2-APT.sh` — APT package manager hardening
-- `Hardening_3-AppArmor.sh` — AppArmor mandatory access control
-- `Hardening_4-Bootloader.sh` — GRUB bootloader hardening
-- `Hardening_5-Additional_Process.sh` — additional process hardening
-- `Hardening_6-Banners.sh` — warning banners configuration
-- `Hardening_7-GDM.sh` — GNOME display manager hardening
-- `Hardening_8-Server_Service.sh` — server services hardening
-- `Hardening_9-Client_Services.sh` — client services hardening
-- `Hardening_10-Systemd_Timesyncd.sh` — systemd time synchronization
-- `Hardening_11-Chrony.sh` — chrony time synchronizatgit reset --hard origin/developion
-- `Hardening_12-Job_Scheduler.sh` — cron & at job scheduling controls
-- `Hardening_13-Network_1.sh` — network stack hardening (part 1)
-- `Hardening_14-Network_2.sh` — network stack hardening (part 2)
-- `Hardening_15-Firewall.sh` — firewall configuration (nftables/iptables)
-- `Hardening_16-SSH.sh` — SSH server hardening
-- `Hardening_17-SSH_Conf.sh` — SSH daemon configuration
-- `Hardening_18-Sudo.sh` — sudo & su privilege escalation controls
-- `Hardening_19-PAM_1.sh` — PAM configuration (part 1)
-- `Hardening_20-PAM_2.sh` — PAM configuration (part 2)
-- `Hardening_21-Accounts.sh` — user accounts & environment hardening
-- `Hardening_22-Journald.sh` — journald logging configuration
-- `Hardening_23-Rsyslog.sh` — rsyslog configuration
-- `Hardening_24-Auditd_1.sh` — auditd rules (part 1)
-- `Hardening_25-Auditd_2.sh` — auditd rules (part 2)
-- `Hardening_26-Auditd_3.sh` — auditd rules (part 3)
-- `Hardening_27-AIDE.sh` — file integrity monitoring (AIDE)
-- `Hardening_28-System_Access.sh` — system access controls
-- `Hardening_29-User_Settings.sh` — user environment settings
-- `--audit`, `--remediation`, `--auto`, `--help` CLI flags for all modules
+All notable changes to this project are documented in [CHANGELOG.md](./CHANGELOG.md). This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
