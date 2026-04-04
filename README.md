@@ -280,13 +280,26 @@ Each module is **fully self-contained** and implements three core functions:
 
 ---
 
-## 🗺️ Roadmap & Future Developments
+## 🗺️ Roadmap
 
-- [ ] **Filesystem & Partitions** — Configure FS partitions per CIS recommendations
-- [ ] **CIS Level Selection** — Strictly choose between Level 1 (Server/Workstation) and Level 2 profiles
-- [ ] **Multi-Distribution Support** — Expand to RedHat / AlmaLinux / RockyLinux
-- [ ] **Rollback Feature** — Restore system state to pre-remediation snapshot
-- [ ] **One-liner Installer** — Stable `curl | bash` installer
+> Development timeline for Hard4U — updated as the project evolves.
+
+---
+
+### 2026 and Beyond — 
+
+| Version  | Feature                                 | Description                                            | Status         |
+| -------- | --------------------------------------- | ------------------------------------------------------ | -------------- |
+| `v1.2.0` | 🗂️ **Configure Filesystem Partitions** | Configure FS partitions per CIS recommendations        | 🚧 In Progress |
+| `v1.3.0` | ⚖️ **CIS Level Selection**              | Strictly choose between Level 1 and Level 2            | 🚧 In Progress |
+| `v2.0.0` | 📊 **Compliance Scoring Dashboard**     | Real-time CIS compliance score per module and globally | 🔜 Planned     |
+| `v3.0.0` | 🐧 **Multi-Distribution Support**       | Expand to RedHat / AlmaLinux / RockyLinux              | 🔜 Planned     |
+| `v4.0.0` | ⚡ **Rewrite in Rust**                   | Full rewrite for performance, safety and portability   | 🔜 Planned     |
+| `v5.0.0` | ⏪ **Rollback Feature**                  | Restore system state to pre-remediation snapshot       | 🔜 Planned     |
+
+---
+
+> **Legend:** 🚧 In Progress &nbsp;|&nbsp; 🔜 Planned &nbsp;|&nbsp; ✅ Done
 
 ---
 
