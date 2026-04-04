@@ -286,7 +286,7 @@ Each module is **fully self-contained** and implements three core functions:
 
 ---
 
-### 2026 and Beyond — 
+### 2026 and Beyond —
 
 | Version  | Feature                                 | Description                                            | Status         |
 | -------- | --------------------------------------- | ------------------------------------------------------ | -------------- |
