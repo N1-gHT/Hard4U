@@ -545,9 +545,10 @@ _manage_var_log_permissions() {
 
     while IFS= read -r -d $'\0' l_file; do
         local l_fname l_mode l_user l_group
-        IFS=: read -r l_fname l_mode l_user l_group \
-            <<< "$(stat -Lc '%n:%#a:%U:%G' "$l_file" 2>/dev/null || true)"
-        [[ -z "$l_fname" ]] && continue
+        l_fname="$l_file"
+        if ! read -r l_mode l_user l_group < <(stat -Lc '%#a %U %G' "$l_file" 2>/dev/null) || [[ -z "$l_mode" ]]; then
+            continue
+        fi
 
         local perm_mask l_auser l_agroup l_rperms
         local l_fix_account='root'
